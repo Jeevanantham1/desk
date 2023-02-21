@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import cookies from 'browser-cookies';
+import { v4 as uuidv4 } from 'uuid';
+
+import history from "../../../helpers/history";
 import './index.scss';
 
 function Login() {
@@ -21,15 +25,22 @@ const handlechange=(event,id)=>{
 }
 const handlesubmit=(event)=>{
     const{username,password}=state;
+    const token = uuidv4();
+    if (token) {
+        console.log('token: ', token);
 
-    console.log('username:',username);
-    console.log('password:',password);
+
+        cookies.set('token', token)
+        history.push('/home')
+    }
+   // console.log('username:',username);
+    //console.log('password:',password);
 }
 
     return (
       
 
-       
+       <div className='bg'>
       
         <div className='login-container'>
             
@@ -57,7 +68,7 @@ const handlesubmit=(event)=>{
            </div>
           </div>
       
-        
+          </div>
     ) 
 }
 
